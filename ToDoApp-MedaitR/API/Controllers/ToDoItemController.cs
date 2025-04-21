@@ -24,6 +24,13 @@ namespace ToDoApp_MedaitR.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("date")]
+        public async Task<IActionResult> GetByDate([FromQuery] DateTime date)
+        {
+            var response = await _mediator.Send(new GetToDoItemsByDateQuery(date));
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddToDoItemCommand command)
         {
