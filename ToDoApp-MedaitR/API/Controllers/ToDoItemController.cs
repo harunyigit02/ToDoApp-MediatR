@@ -31,6 +31,13 @@ namespace ToDoApp_MedaitR.API.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetByUser(Guid userId)
+        {
+            var response = await _mediator.Send(new GetToDoItemsByUserQuery(userId));
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddToDoItemCommand command)
         {
