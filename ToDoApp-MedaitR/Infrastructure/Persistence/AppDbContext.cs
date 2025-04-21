@@ -10,5 +10,16 @@ namespace ToDoApp_MedaitR.Infrastructure.Persistence
 
         public DbSet<ToDoItem> ToDoItems { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ToDoItem>()
+                .HasOne(t => t.User)
+                .WithMany()
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
